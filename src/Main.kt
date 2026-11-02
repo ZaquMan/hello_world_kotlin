@@ -1,14 +1,22 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+// runN accepts an integer, n, and a function to run n times
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+fun runN(n: Int, action: () -> Unit) {
+    for (i in 1..n) {
+        action()
     }
+}
+
+class Envelope(val letter: String, val address: Address, var hasStamp: Boolean = false)
+data class Address(val street: String, val city: String, val state: String, val zipCode: Int) {
+    override fun toString(): String {
+       return "$street\n$city, $state $zipCode"
+    }
+}
+
+fun main() {
+    runN(5) {println("Hello World!")}
+
+    val letter = "Hello World! I'm Zach!"
+    val envelope = Envelope(letter, Address("123 Anywhere St", "Somewhere Ville", "NE", 12345), true)
+    println("My envelope is going to:\n${envelope.address}")
 }
